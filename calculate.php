@@ -3,14 +3,13 @@
 <head> 
     <meta charset="UTF-8">
     <title>Interface Calculadora</title>
-	<style>
+<style>
 body {
 background-color: blue;
 }
 h1 {
 color: red;
 }
-
 </style>
 </head>
 <body>
