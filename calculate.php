@@ -26,6 +26,9 @@ color: red;
      <option>sub-</option>
      <option>mult*</option>
      <option>div/</option>
+	 <option>root</option>
+	 <option>percent%</option>
+	 <option>1/x</option>
   </select>
   <input type="submit" value="Calculate">
  </form>
