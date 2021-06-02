@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+	<style>
+           body {
+           background-color: blue;
+                }
+           .t1 {
+                color: orange;
+              }
+    </style>
+    <script>
+        function mostraInfo(strUF) {
+            console.log(strUF);
+            if (strUF.length > 0) {
+                let xmlHttp = new XMLHttpRequest();
+                xmlHttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        let cities = document.getElementById("cidades");
+                        let city = new Option(this.responseText);
+                        cities.options.add(city);
+                    }
+                }
+                xmlHttp.open("GET", "http://localhost/3daw/obterCidades/GetCidades.php?estado=" + strUF, true);
+                xmlHttp.send();
+                console.log("requisição enviada");
+            }
+        }
+    </script>
+</head>
+<body>
+<form action="">
+    <label class= "t1">Diga seu Estado:</label><br><br>
+    <input type="text" id="uf" name="uf" onchange="mostraInfo(this.value)"><br><br>
+	<label class= "t1">Selecione a Cidade:</label><br><br>
+    <select id="cidades">
+	 
+    </select>
+    <br><br>
+    <input type="submit" value="Enviar">
+</form>
+
+</body>
+</html>
