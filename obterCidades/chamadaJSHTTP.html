@@ -13,21 +13,28 @@
     </style>
     <script>
         function mostraInfo(strUF) {
+		    document.getElementById("cidades").innerHTML = "";
             console.log(strUF);
             if (strUF.length > 0) {
                 let xmlHttp = new XMLHttpRequest();
                 xmlHttp.onreadystatechange = function() {
                     if (this.readyState == 4 && this.status == 200) {
-                        let cities = document.getElementById("cidades");
-                        let city = new Option(this.responseText);
-                        cities.options.add(city);
+					    console.log("Array vindo do backend",this.responseText);
+						let obj = JSON.parse(this.responseText);
+						for (i=0;i<=obj.length;i++){
+						  let cities = document.getElementById("cidades");
+						  let city = new Option(obj[i], obj[i]);
+                          cities.options.add(city);
                     }
+					 document.getElementById("cidades").disabled = false;
                 }
-                xmlHttp.open("GET", "http://localhost/3daw/obterCidades/GetCidades.php?estado=" + strUF, true);
+                
+            }
+			    xmlHttp.open("GET", "http://localhost/3daw/obterCidades/GetCidades.php?estado=" + strUF, true);
                 xmlHttp.send();
                 console.log("requisição enviada");
-            }
         }
+    }
     </script>
 </head>
 <body>
@@ -35,7 +42,7 @@
     <label class= "t1">Diga seu Estado:</label><br><br>
     <input type="text" id="uf" name="uf" onchange="mostraInfo(this.value)"><br><br>
 	<label class= "t1">Selecione a Cidade:</label><br><br>
-    <select id="cidades">
+    <select id="cidades" onclick="this.disabled = false;" disabled>
 	 
     </select>
     <br><br>
